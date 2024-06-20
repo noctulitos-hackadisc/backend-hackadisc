@@ -63,4 +63,36 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+    /**
+     * Get the role that owns the user.
+     */
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    /**
+     * Get the manager record associated with the user.
+     */
+    public function manager()
+    {
+        return $this->hasOne(Manager::class);
+    }
+
+    /**
+     * Get the areaChief record associated with the user.
+     */
+    public function areaChief()
+    {
+        return $this->hasOne(AreaChief::class);
+    }
+
+    /**
+     * Get the administrator record associated with the user.
+     */
+    public function administrator()
+    {
+        return $this->hasOne(Administrator::class);
+    }
 }
