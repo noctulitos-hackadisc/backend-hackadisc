@@ -1,0 +1,169 @@
+@startuml ER-Diagram
+hide empty methods
+
+entity User {
+    * id : number <<generated>> <<PK>>
+    --
+    * email : text
+    * password : text
+    * created_at : timestamp
+    * updated_at : timestamp
+    --
+    *role_id : number <<FK>>
+}
+
+entity Role {
+    * id : number <<generated>> <<PK>>
+    --
+    * role_name : text
+    * created_at : timestamp
+    * updated_at : timestamp
+}
+
+entity Manager {
+    * id : number <<generated>> <<PK>>
+    --
+    * name : text
+    * created_at : timestamp
+    * updated_at : timestamp
+    --
+    * user_id : number <<FK>>
+}
+
+entity AreaChief {
+    * id : number <<generated>> <<PK>>
+    --
+    * name : text
+    * created_at : timestamp
+    * updated_at : timestamp
+    --
+    * user_id : number <<FK>>
+}
+
+entity Administrator {
+    * id : number <<generated>> <<PK>>
+    --
+    * name : text
+    * created_at : timestamp
+    * updated_at : timestamp
+    --
+    * user_id : number <<FK>>
+}
+
+entity Company {
+    * id : number <<generated>> <<PK>>
+    --
+    * name : text
+    * created_at : timestamp
+    * updated_at : timestamp
+    --
+    * manager_id : number <<FK>>
+    * area_id : number <<FK>>
+    * type_id : number <<FK>>
+    --
+    parent_company_id : number <<FK>>
+}
+
+entity CompanyType {
+    * id : number <<generated>> <<PK>>
+    --
+    * name : text
+    * created_at : timestamp
+    * updated_at : timestamp
+}
+
+entity Area {
+    * id : number <<generated>> <<PK>>
+    --
+    * area_name : text
+    * created_at : timestamp
+    * updated_at : timestamp
+    --
+    * company_id : number <<FK>>
+    * area_chief_id : number <<FK>>
+}
+
+entity Post {
+    * id : number <<generated>> <<PK>>
+    --
+    * post_name : text
+    * created_at : timestamp
+    * updated_at : timestamp
+}
+
+entity Worker {
+    * id : number <<generated>> <<PK>>
+    --
+    * name : text
+    * created_at : timestamp
+    * updated_at : timestamp
+    --
+    * area_id : number <<FK>>
+    * post_id : number <<FK>>
+    * status_id : number <<FK>>
+    * company_id : number <<FK>>
+}
+
+entity Status {
+    * id : number <<generated>> <<PK>>
+    --
+    * type : text
+    * created_at : timestamp
+    * updated_at : timestamp
+}
+
+entity Evaluation {
+    * id : number <<generated>> <<PK>>
+    --
+    * adaptability_to_change : float
+    * safe_conduct : float
+    * dynamism_energy : float
+    * personal_effectiveness : float
+    * initiative : float
+    * working_under_pressure : float
+    * date : timestamp
+    * created_at : timestamp
+    * updated_at : timestamp
+    --
+    * worker_id : number <<FK>>
+}
+
+entity Intervention {
+    * id : number <<generated>> <<PK>>
+    --
+    * start_date : timestamp
+    * end_date : timestamp
+    * type : text
+    * intervened_competency : text
+    * details : text
+    * created_at : timestamp
+    * updated_at : timestamp
+    --
+    * evaluation_id : number <<FK>>
+    * worker_id : number <<FK>>
+}
+
+Area }|--|| Company
+Worker }o--o| Company
+Manager ||--|{ Company
+Company }o--|| CompanyType
+
+Area ||--o{ Worker
+Post ||--|{ Worker
+
+Worker }|--|| Status
+
+Worker ||--o{ Evaluation
+Worker ||--o{ Intervention
+Intervention }|--|| Evaluation
+
+User }o--|| Role
+User ||--|| Manager
+User ||--|| AreaChief
+User ||--|| Administrator
+
+AreaChief ||--|| Area
+
+Company }o--o{ Company
+
+@enduml
