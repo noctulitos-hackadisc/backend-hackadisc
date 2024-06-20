@@ -15,7 +15,7 @@ entity User {
 entity Role {
     * id : number <<generated>> <<PK>>
     --
-    * role_name : text
+    * name : text
     * created_at : timestamp
     * updated_at : timestamp
 }
@@ -58,8 +58,7 @@ entity Company {
     * updated_at : timestamp
     --
     * manager_id : number <<FK>>
-    * area_id : number <<FK>>
-    * type_id : number <<FK>>
+    * company_type_id : number <<FK>>
     --
     parent_company_id : number <<FK>>
 }
@@ -75,7 +74,7 @@ entity CompanyType {
 entity Area {
     * id : number <<generated>> <<PK>>
     --
-    * area_name : text
+    * name : text
     * created_at : timestamp
     * updated_at : timestamp
     --
@@ -86,7 +85,7 @@ entity Area {
 entity Post {
     * id : number <<generated>> <<PK>>
     --
-    * post_name : text
+    * name : text
     * created_at : timestamp
     * updated_at : timestamp
 }
@@ -121,7 +120,7 @@ entity Evaluation {
     * personal_effectiveness : float
     * initiative : float
     * working_under_pressure : float
-    * date : timestamp
+    * date : datetime
     * created_at : timestamp
     * updated_at : timestamp
     --
@@ -131,16 +130,24 @@ entity Evaluation {
 entity Intervention {
     * id : number <<generated>> <<PK>>
     --
-    * start_date : timestamp
-    * end_date : timestamp
-    * type : text
+    * start_date : datetime
+    * end_date : datetime
     * intervened_competency : text
-    * details : text
+    * description : text
     * created_at : timestamp
     * updated_at : timestamp
     --
+    * intervention_type_id : number <<FK>>
     * evaluation_id : number <<FK>>
     * worker_id : number <<FK>>
+}
+
+entity InterventionType {
+    * id : number <<generated>> <<PK>>
+    --
+    * name : text
+    * created_at : timestamp
+    * updated_at : timestamp
 }
 
 Area }|--|| Company
@@ -156,6 +163,8 @@ Worker }|--|| Status
 Worker ||--o{ Evaluation
 Worker ||--o{ Intervention
 Intervention }|--|| Evaluation
+InterventionType ||--o{ Intervention
+
 
 User }o--|| Role
 User ||--|| Manager
