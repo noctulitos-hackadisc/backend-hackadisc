@@ -1,3 +1,4 @@
-*
-!public/
-!.gitignore
+/public/*
+# Include the datasets_seeders folder and its contents
+!public/datasets_seeders/
+!public/datasets_seeders/*.xlsx
