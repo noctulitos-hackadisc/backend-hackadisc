@@ -18,6 +18,10 @@ class Manager extends Model
         'name',
     ];
 
+    protected $hidden = [
+        'user_id'
+    ];
+
     /**
      * Get the user that owns the Manager
      *

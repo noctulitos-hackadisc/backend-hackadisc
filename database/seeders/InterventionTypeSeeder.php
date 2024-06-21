@@ -13,7 +13,7 @@ class InterventionTypeSeeder extends Seeder
      */
     public function run()
     {
-        $path = storage_path('app/public/datasets_seeders/interventions.xlsx');
+        $path = storage_path('app/public/datasets_seeders/type_interventions.xlsx');
         $spreadsheet = IOFactory::load($path);
         $sheet = $spreadsheet->getActiveSheet();
         $rows = $sheet->toArray();

@@ -1,9 +1,10 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\RoleBasedController;
+use App\Http\Controllers\InterventionTypeController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -15,15 +16,29 @@ use App\Http\Controllers\AuthController;
 |
 */
 
+
+// Protected routes for admin
 Route::middleware(['auth:api', 'role:1'])->group(function () {
+
+    Route::get('/intervention-list', [InterventionTypeController::class, 'index']);
+    Route::get('/intervention-list/{id}', [InterventionTypeController::class, 'show']);
 });
 
+// Protected routes for Manager
 Route::middleware(['auth:api', 'role:2'])->group(function () {
 });
 
+// Protected routes for Area chief
 Route::middleware(['auth:api', 'role:3'])->group(function () {
 });
 
+// Protected routes for all roles
+Route::middleware(['auth:api', 'role:1,2,3'])->group(function () {
+    Route::get('/profile', [RoleBasedController::class, 'profile']);
+});
+
+
+// Auth routes
 Route::group([
     'middleware' => 'api',
     'prefix' => 'auth'

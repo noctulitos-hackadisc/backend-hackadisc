@@ -18,6 +18,14 @@ class Company extends Model
         'name',
     ];
 
+    protected $hidden = [
+        'manager_id',
+        'company_type_id',
+        'parent_company_id',
+    ];
+
+
+
     /**
      * Get the manager that owns the company.
      */
