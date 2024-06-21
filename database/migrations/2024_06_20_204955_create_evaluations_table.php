@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('evaluations', function (Blueprint $table) {
             $table->id();
-            $table->float('adaptabilty_to_change', 3, 2)->unsigned();
+            $table->float('adaptability_to_change', 3, 2)->unsigned();
             $table->float('safe_conduct', 3, 2)->unsigned();
             $table->float('dynamism_energy', 3, 2)->unsigned();
             $table->float('personal_effectiveness', 3, 2)->unsigned();
@@ -22,7 +22,7 @@ return new class extends Migration
             $table->dateTime('date');
             $table->timestamps();
 
-            $table->foreignId('worker_id')->constrained()->onDelete('cascade');
+            $table->foreignId('worker_id')->nullable()->constrained()->onDelete('cascade');
         });
     }
 

@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::create('intervention_types', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('intervened_competencies');
+            $table->integer('duration');
+            $table->text('description');
             $table->timestamps();
         });
     }

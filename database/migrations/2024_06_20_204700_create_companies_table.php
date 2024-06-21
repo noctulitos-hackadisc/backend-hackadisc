@@ -16,9 +16,9 @@ return new class extends Migration
             $table->string('name');
             $table->timestamps();
 
-            $table->foreignId('manager_id')->constrained()->onDelete('cascade');
-            $table->foreignId('post_id')->constrained()->onDelete('cascade');
-            $table->foreignId('company_type_id')->constrained()->onDelete('cascade');
+            $table->foreignId('manager_id')->nullable()->constrained('managers')->onDelete('cascade');
+            $table->foreignId('company_type_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreignId('parent_company_id')->nullable()->constrained('companies')->onDelete('cascade');
         });
     }
 
