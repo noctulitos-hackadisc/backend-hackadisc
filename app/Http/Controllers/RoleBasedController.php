@@ -6,6 +6,11 @@ use Illuminate\Support\Facades\Auth;
 
 class RoleBasedController extends Controller
 {
+    /**
+     * Redirect to the appropriate controller based on the user's role
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function profile()
     {
         $user = Auth::user();

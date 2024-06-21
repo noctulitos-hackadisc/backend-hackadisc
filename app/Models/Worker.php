@@ -18,6 +18,14 @@ class Worker extends Model
         'name',
     ];
 
+    protected $hidden = [
+        'area_id',
+        'post_id',
+        'status_id'
+    ];
+
+
+
     /**
      * Get the area that owns the worker.
      */

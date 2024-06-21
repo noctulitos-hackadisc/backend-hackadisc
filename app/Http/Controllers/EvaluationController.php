@@ -29,4 +29,11 @@ class EvaluationController extends Controller
         $evaluation = Evaluation::find($id);
         return response()->json($evaluation);
     }
+
+    public function workerEvaluations($id)
+    {
+        $evaluations = Evaluation::where('worker_id', $id)->get();
+
+        return response()->json($evaluations);
+    }
 }
