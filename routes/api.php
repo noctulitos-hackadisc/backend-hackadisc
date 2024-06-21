@@ -15,8 +15,13 @@ use App\Http\Controllers\AuthController;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware(['auth:api', 'role:1'])->group(function () {
+});
+
+Route::middleware(['auth:api', 'role:2'])->group(function () {
+});
+
+Route::middleware(['auth:api', 'role:3'])->group(function () {
 });
 
 Route::group([
@@ -28,5 +33,5 @@ Route::group([
     Route::post('login', [AuthController::class, 'login'])->name('login');
     Route::post('logout', [AuthController::class, 'logout']);
     Route::post('refresh', [AuthController::class, 'refresh']);
-    Route::post('me', [AuthController::class, 'me']);
+    Route::get('me', [AuthController::class, 'me']);
 });
