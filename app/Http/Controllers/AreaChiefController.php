@@ -3,10 +3,40 @@
 namespace App\Http\Controllers;
 
 use App\Models\Company;
+use App\Models\AreaChief;
 use Illuminate\Http\Request;
 
 class AreaChiefController extends Controller
 {
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function index()
+    {
+        $areaChief = AreaChief::all();
+        return response()->json($areaChief);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function show($id)
+    {
+        $areaChief = AreaChief::find($id);
+        return response()->json($areaChief);
+    }
+
+    /**
+     * Display the profile of the authenticated user.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function profile()
     {
         $user = auth()->user()->load('areaChief');

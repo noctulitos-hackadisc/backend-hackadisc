@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Worker;
+use App\Models\CompanyType;
 use Illuminate\Http\Request;
 
-class WorkerController extends Controller
+class CompanyTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class WorkerController extends Controller
      */
     public function index()
     {
-        $workers = Worker::all();
-        return response()->json($workers);
+        $companyTypes = CompanyType::all();
+        return response()->json($companyTypes);
     }
 
     /**
@@ -26,7 +26,7 @@ class WorkerController extends Controller
      */
     public function show($id)
     {
-        $worker = Worker::find($id);
-        return response()->json($worker);
+        $companyType = CompanyType::find($id);
+        return response()->json($companyType);
     }
 }

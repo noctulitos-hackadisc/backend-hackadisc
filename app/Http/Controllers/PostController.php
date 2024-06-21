@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Worker;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
-class WorkerController extends Controller
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class WorkerController extends Controller
      */
     public function index()
     {
-        $workers = Worker::all();
-        return response()->json($workers);
+        $posts = Post::all();
+        return response()->json($posts);
     }
 
     /**
@@ -26,7 +26,7 @@ class WorkerController extends Controller
      */
     public function show($id)
     {
-        $worker = Worker::find($id);
-        return response()->json($worker);
+        $post = Post::find($id);
+        return response()->json($post);
     }
 }

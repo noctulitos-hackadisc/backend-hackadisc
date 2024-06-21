@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Worker;
+use App\Models\Status;
 use Illuminate\Http\Request;
 
-class WorkerController extends Controller
+class StatusController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class WorkerController extends Controller
      */
     public function index()
     {
-        $workers = Worker::all();
-        return response()->json($workers);
+        $status = Status::all();
+        return response()->json($status);
     }
 
     /**
@@ -26,7 +26,7 @@ class WorkerController extends Controller
      */
     public function show($id)
     {
-        $worker = Worker::find($id);
-        return response()->json($worker);
+        $status = Status::find($id);
+        return response()->json($status);
     }
 }

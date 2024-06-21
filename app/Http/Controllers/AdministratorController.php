@@ -3,12 +3,45 @@
 namespace App\Http\Controllers;
 
 use App\Models\Company;
+use Illuminate\Http\Request;
+use App\Models\Administrator;
 
 class AdministratorController extends Controller
 {
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function index()
+    {
+        $administrator = Administrator::all();
+        return response()->json($administrator);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function show($id)
+    {
+        $administrator = Administrator::find($id);
+        return response()->json($administrator);
+    }
+
+
+    /**
+     * Display the profile of the authenticated user.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function profile()
     {
+        $user = auth()->user()->load('administrator');
+        $administrator = $user->administrator;
         // Get all companies with their managers
         $companies = Company::where('company_type_id', 1)
             ->orWhere('company_type_id', 2)
@@ -25,16 +58,16 @@ class AdministratorController extends Controller
 
         $response = [
             'user' => [
-                'id' => auth()->user()->id,
-                'email' => auth()->user()->email,
-                'created_at' => auth()->user()->created_at,
-                'updated_at' => auth()->user()->updated_at,
-                'role' => auth()->user()->role,
+                'id' => $user->id,
+                'email' => $user->email,
+                'created_at' => $user->created_at,
+                'updated_at' => $user->updated_at,
+                'role' => $user->role,
                 'profile' => [
-                    'id' => auth()->user()->administrator->id,
-                    'name' => auth()->user()->administrator->name,
-                    'created_at' => auth()->user()->administrator->created_at,
-                    'updated_at' => auth()->user()->administrator->updated_at,
+                    'id' => $administrator->id,
+                    'name' => $administrator->name,
+                    'created_at' => $administrator->created_at,
+                    'updated_at' => $administrator->updated_at,
                     'companies' => $companies,
                 ],
             ],

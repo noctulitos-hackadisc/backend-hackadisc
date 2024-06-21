@@ -3,10 +3,40 @@
 namespace App\Http\Controllers;
 
 use App\Models\Company;
+use App\Models\Manager;
 use Illuminate\Http\Request;
 
 class ManagerController extends Controller
 {
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function index()
+    {
+        $manager = Manager::all();
+        return response()->json($manager);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function show($id)
+    {
+        $manager = Manager::find($id);
+        return response()->json($manager);
+    }
+
+    /**
+     * Display the profile of the authenticated user.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function profile()
     {
         $user = auth()->user()->load('manager');

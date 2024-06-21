@@ -2,7 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ManagerController;
+use App\Http\Controllers\AreaChiefController;
 use App\Http\Controllers\RoleBasedController;
+use App\Http\Controllers\AdministratorController;
 use App\Http\Controllers\InterventionTypeController;
 
 /*
@@ -32,6 +35,10 @@ Route::middleware(['auth:api', 'role:2'])->group(function () {
 Route::middleware(['auth:api', 'role:3'])->group(function () {
 });
 
+// Protected routes for admin and manager
+Route::middleware(['auth:api', 'role:1,2'])->group(function () {
+});
+
 // Protected routes for all roles
 Route::middleware(['auth:api', 'role:1,2,3'])->group(function () {
     Route::get('/profile', [RoleBasedController::class, 'profile']);
@@ -49,4 +56,14 @@ Route::group([
     Route::post('logout', [AuthController::class, 'logout']);
     Route::post('refresh', [AuthController::class, 'refresh']);
     Route::get('me', [AuthController::class, 'me']);
+
+    // Show resources
+    Route::get('/administrators', [AdministratorController::class, 'index']);
+    Route::get('/administrators/{id}', [AdministratorController::class, 'show']);
+
+    Route::get('/managers', [ManagerController::class, 'index']);
+    Route::get('/managers/{id}', [ManagerController::class, 'show']);
+
+    Route::get('/area-chiefs', [AreaChiefController::class, 'index']);
+    Route::get('/area-chiefs/{id}', [AreaChiefController::class, 'show']);
 });

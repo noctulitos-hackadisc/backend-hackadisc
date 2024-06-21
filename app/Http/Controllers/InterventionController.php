@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Worker;
+use App\Models\Intervention;
 use Illuminate\Http\Request;
 
-class WorkerController extends Controller
+class InterventionController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -14,8 +15,8 @@ class WorkerController extends Controller
      */
     public function index()
     {
-        $workers = Worker::all();
-        return response()->json($workers);
+        $interventions = Intervention::all();
+        return response()->json($interventions);
     }
 
     /**
@@ -26,7 +27,7 @@ class WorkerController extends Controller
      */
     public function show($id)
     {
-        $worker = Worker::find($id);
-        return response()->json($worker);
+        $intervention = Intervention::find($id);
+        return response()->json($intervention);
     }
 }
