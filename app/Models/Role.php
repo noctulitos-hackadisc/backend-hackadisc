@@ -18,6 +18,11 @@ class Role extends Model
         'name',
     ];
 
+    protected $hidden = [
+        'id'
+
+    ];
+
     /**
      * Get the users for the role.
      */
