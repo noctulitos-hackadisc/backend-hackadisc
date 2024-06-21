@@ -58,7 +58,6 @@ entity Company {
     * updated_at : timestamp
     --
     * manager_id : number <<FK>>
-    * post_id : number <<FK>>
     * company_type_id : number <<FK>>
     --
     parent_company_id : number <<FK>>
@@ -89,6 +88,8 @@ entity Post {
     * name : text
     * created_at : timestamp
     * updated_at : timestamp
+    --
+    * company_id : number <<FK>>
 }
 
 entity Worker {

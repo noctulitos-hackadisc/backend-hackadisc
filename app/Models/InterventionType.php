@@ -16,6 +16,9 @@ class InterventionType extends Model
      */
     protected $fillable = [
         'name',
+        'intervened_competencies',
+        'duration',
+        'description',
     ];
 
     /**
