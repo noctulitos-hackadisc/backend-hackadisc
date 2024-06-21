@@ -25,4 +25,12 @@ class Post extends Model
     {
         return $this->hasMany(Worker::class);
     }
+
+    /**
+     * Get the company that owns the Post
+     */
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
 }

@@ -27,6 +27,14 @@ class Company extends Model
     }
 
     /**
+     * Get the posts that owns the company.
+     */
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    /**
      * Get the company type that owns the company.
      */
     public function companyType()

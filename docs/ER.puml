@@ -58,6 +58,7 @@ entity Company {
     * updated_at : timestamp
     --
     * manager_id : number <<FK>>
+    * post_id : number <<FK>>
     * company_type_id : number <<FK>>
     --
     parent_company_id : number <<FK>>
@@ -131,9 +132,7 @@ entity Intervention {
     * id : number <<generated>> <<PK>>
     --
     * start_date : datetime
-    * end_date : datetime
     * intervened_competency : text
-    * description : text
     * created_at : timestamp
     * updated_at : timestamp
     --
@@ -146,6 +145,9 @@ entity InterventionType {
     * id : number <<generated>> <<PK>>
     --
     * name : text
+    * intervened_competencies : text
+    * duration : number
+    * description : text
     * created_at : timestamp
     * updated_at : timestamp
 }
@@ -165,6 +167,7 @@ Worker ||--o{ Intervention
 Intervention }|--|| Evaluation
 InterventionType ||--o{ Intervention
 
+Post }|--o| Company
 
 User }o--|| Role
 User ||--|| Manager
