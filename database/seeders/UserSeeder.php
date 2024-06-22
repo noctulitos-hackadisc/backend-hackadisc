@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
 
         User::create([
             'id' => 1,
-            'email' => 'administrador@pignus.cl',
+            'email' => 'administrator@pignus.cl',
             'password' => bcrypt('password'),
             'role_id' => $administrator->id,
             'created_at' => now(),
