@@ -16,9 +16,7 @@ class Intervention extends Model
      */
     protected $fillable = [
         'start_date',
-        'end_date',
         'intervened_competency',
-        'description',
     ];
 
     /**

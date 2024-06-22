@@ -134,6 +134,7 @@ entity Intervention {
     --
     * start_date : datetime
     * intervened_competency : text
+    * active : boolean
     * created_at : timestamp
     * updated_at : timestamp
     --

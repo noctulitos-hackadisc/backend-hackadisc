@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('interventions', function (Blueprint $table) {
             $table->id();
             $table->dateTime('start_date');
-            $table->dateTime('end_date');
-            $table->text('description');
+            $table->text('intervened_competency');
+            $table->boolean('active')->default(true);
             $table->timestamps();
 
             $table->foreignId('intervention_type_id')->constrained()->onDelete('cascade');
