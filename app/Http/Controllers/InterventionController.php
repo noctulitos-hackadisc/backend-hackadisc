@@ -35,6 +35,13 @@ class InterventionController extends Controller
     public function workerInterventions($id)
     {
         $interventions = Intervention::where('worker_id', $id)->get();
+        $interventions->load('worker');
+        $interventions->each(function ($intervention) {
+            $intervention->worker->load('status');
+            unset($intervention['worker_id']);
+        });
+
+
         return response()->json($interventions);
     }
 
