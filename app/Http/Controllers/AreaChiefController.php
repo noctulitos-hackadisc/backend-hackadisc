@@ -55,7 +55,7 @@ class AreaChiefController extends Controller
                     'name' => $areaChief->name,
                     'created_at' => $areaChief->created_at,
                     'updated_at' => $areaChief->updated_at,
-                    'companies' => $areaChief->area->company
+                    'companies' => [$areaChief->area->company]
                 ],
             ],
         ];
