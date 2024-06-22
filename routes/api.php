@@ -82,6 +82,7 @@ Route::middleware(['auth:api', 'role:1,2,3'])->group(function () {
 
     Route::get('/interventions', [InterventionController::class, 'index']);
     Route::get('/interventions/{id}', [InterventionController::class, 'show']);
+    Route::get('/interventions/worker/{id}', [InterventionController::class, 'workerInterventions']);
 
     Route::get('/companies', [CompanyController::class, 'index']);
     Route::get('/companies/{id}', [CompanyController::class, 'show']);

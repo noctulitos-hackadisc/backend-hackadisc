@@ -32,6 +32,13 @@ class InterventionController extends Controller
         return response()->json($intervention);
     }
 
+    public function workerInterventions($id)
+    {
+        $interventions = Intervention::where('worker_id', $id)->get();
+        return response()->json($interventions);
+    }
+
+
     public function open(string $id, Request $request)
     {
         try {
