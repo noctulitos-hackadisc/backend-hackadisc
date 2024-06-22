@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Evaluation;
 use Illuminate\Http\Request;
 
@@ -34,6 +35,11 @@ class EvaluationController extends Controller
     {
         $evaluations = Evaluation::where('worker_id', $id)->get();
 
-        return response()->json($evaluations);
+        $formattedEvaluations = $evaluations->map(function ($evaluation) {
+            $evaluation->date = Carbon::parse($evaluation->date)->format('d/m/Y');
+            return $evaluation;
+        });
+
+        return response()->json($formattedEvaluations);
     }
 }
