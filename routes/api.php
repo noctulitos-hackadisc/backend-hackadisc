@@ -40,6 +40,11 @@ Route::middleware(['auth:api', 'role:2'])->group(function () {
 
 // Protected routes for Area chief
 Route::middleware(['auth:api', 'role:3'])->group(function () {
+
+    // id = user id
+    Route::post('open-intervention/{id}', [InterventionController::class, 'open']);
+    // id = intervention id
+    Route::post('close-intervention/{id}', [InterventionController::class, 'close']);
 });
 
 // Protected routes for admin and manager
