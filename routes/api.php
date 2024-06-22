@@ -46,6 +46,12 @@ Route::middleware(['auth:api', 'role:3'])->group(function () {
 Route::middleware(['auth:api', 'role:1,2'])->group(function () {
 });
 
+// Protected routes for admin and area chief
+Route::middleware(['auth:api', 'role:1,3'])->group(function () {
+
+    Route::get('/interventions-types', [InterventionTypeController::class, 'index']);
+});
+
 // Protected routes for all roles
 Route::middleware(['auth:api', 'role:1,2,3'])->group(function () {
     Route::get('/profile', [RoleBasedController::class, 'profile']);
