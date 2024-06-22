@@ -42,6 +42,8 @@ class AreaChiefController extends Controller
         $user = auth()->user()->load('areaChief');
         $areaChief = $user->areaChief;
         $areaChief->load('area');
+        $company = $areaChief->area->company;
+        $company->has_workers = $company->workers()->exists();
 
         $response = [
             'user' => [

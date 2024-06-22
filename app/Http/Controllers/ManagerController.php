@@ -52,6 +52,19 @@ class ManagerController extends Controller
             }
         });
 
+        // Check if each company and subcompany have workers and add the 'has_workers' field
+        $companies->each(function ($company) {
+            // Check if the company has workers
+            $company->has_workers = $company->workers()->exists();
+
+            // Check if subcompanies have workers
+            if ($company->company_type_id == 2 && isset($company->subcompanies)) {
+                $company->subcompanies->each(function ($subcompany) {
+                    $subcompany->has_workers = $subcompany->workers()->exists();
+                });
+            }
+        });
+
         $response = [
             'user' => [
                 'id' => $user->id,
