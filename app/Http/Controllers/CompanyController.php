@@ -21,6 +21,7 @@ class CompanyController extends Controller
         if ($user->role_id == 3) {
             $area_chief = $user->areaChief;
             $area = $area_chief->area;
+
             $workers = Worker::where([['company_id', $area->company_id], ['area_id', $area->id]])->get();
             $workers->load('area', 'post', 'status', 'evaluations');
         } else if ($user->role_id == 2) {
@@ -28,7 +29,7 @@ class CompanyController extends Controller
             $company = $manager->companies;
 
             $workers = $company->flatMap(function ($company) {
-                return $company->workers->load('area', 'post', 'status', 'evaluations');;
+                return $company->workers->load('area', 'post', 'status', 'evaluations');
             });
         } else {
             $workers = Worker::all();
@@ -65,7 +66,8 @@ class CompanyController extends Controller
         } else {
             $workers = $company->workers->load('area', 'post', 'status', 'evaluations');
         }
-        $formattedWorkers = $workers->map(function ($worker) {
+        $formattedWorkers = $workers->map(function ($worker) use ($company) {
+            $worker->company_name = $company->name;
             $worker->evaluations = $worker->evaluations->map(function ($evaluation) {
                 $evaluation->date = Carbon::parse($evaluation->date)->format('d/m/Y');
                 return $evaluation;
