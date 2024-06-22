@@ -56,6 +56,18 @@ class AdministratorController extends Controller
             }
         });
 
+        $companies->each(function ($company) {
+            // Check if the company has workers
+            $company->has_workers = $company->workers()->exists();
+
+            // Check if subcompanies have workers
+            if ($company->company_type_id == 2 && isset($company->subcompanies)) {
+                $company->subcompanies->each(function ($subcompany) {
+                    $subcompany->has_workers = $subcompany->workers()->exists();
+                });
+            }
+        });
+
         $response = [
             'user' => [
                 'id' => $user->id,
@@ -69,6 +81,7 @@ class AdministratorController extends Controller
                     'created_at' => $administrator->created_at,
                     'updated_at' => $administrator->updated_at,
                     'companies' => $companies,
+
                 ],
             ],
         ];
