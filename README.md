@@ -10,7 +10,7 @@ git clone https://github.com/noctulitos-hackadisc/backend-hackadisc
 
 Then open the folder using Visual studio code and continue with the guide.
 
-### Laravel API
+### Laravel 10 API
 
 To configure Laravel, you must open a terminal with the path inside the 'backend-hackadisc' folder, then follow these steps:
 
